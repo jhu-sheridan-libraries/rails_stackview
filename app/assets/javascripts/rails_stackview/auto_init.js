@@ -5,11 +5,11 @@
 // We will initialize element with that argument. 
 (function( $ ) {
   // page:load for turbolinks too, not sure if it really works right.     
-  $(document).on('ready page:load', function () {
+  $(window).load( function () {
     $("[data-stackview-init]").each(function(i, element) {
       element = $(element);
       element.stackView(element.data("stackviewInit"));
-    });   
+    });
   });
 
 })( jQuery );

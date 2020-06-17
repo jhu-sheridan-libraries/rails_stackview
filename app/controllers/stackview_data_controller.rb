@@ -9,7 +9,7 @@ class StackviewDataController < ApplicationController
     "shelfrank" => 1,
     "measurement_page_numeric" => 100
   }
-ß
+
   # config for different call number types; we don't
   # fully support call number types yet, but are building for it. 
   # with the exception of the 'test' type
