@@ -5,11 +5,11 @@ require "rails_stackview/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "stackview_acorn_tester"
+  s.name        = "rails_stackview"
   s.version     = RailsStackview::VERSION
   s.authors     = ["Amanda Cornwell"]
   s.email       = ["amanda.cornwell@jhu.edu"]
-  s.homepage    = "https://github.com/acornwe3/rails_stackview"
+  s.homepage    = "https://github.com/jhu-sheridan-libraries/rails_stackview"
   s.summary     = "Test"
   s.license     = "MIT"
 
