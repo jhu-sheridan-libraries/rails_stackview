@@ -1,21 +1,22 @@
 <div class="shelfbrowser">
-    <%= content_tag "div", 
-        {   
+  <%= :stackview_browser_item_path %>
+    <%= content_tag "div",
+        {
             :class => "shelfbrowser-browse-column",
             :data => {
                 :stackview_browser_item_path => (respond_to?(:stackview_browser_item_path) ?
                     stackview_browser_item_path :
                     "")
-            } 
+            }
         } do %>
-        <%= content_tag "div", "", 
+        <%= content_tag "div", "",
                 :class => "shelfbrowser-stackview",
                 :data => {
                     :stackview_init => {
                         :id => 0,
                         :url => stackview_data_path(
-                            local_assigns[:call_number_type] || "lc", 
-                            :origin_sort_key => local_assigns[:origin_sort_key]
+                            local_assigns[:call_number_type] || "lc",
+                            :origin_sort_key => "local_assigns[:origin_sort_key]"
                         ),
                         :search_type => "loc_sort_order"
                     }
@@ -33,6 +34,7 @@
             <% end %>
 
             <h2>Virtual Shelf Browse</h2>
+            <%= stackview_browser_item_path %>
         </div>
 
         <div class="stack-item-panel"></div>        

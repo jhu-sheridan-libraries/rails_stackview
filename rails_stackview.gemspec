@@ -5,18 +5,18 @@ require "rails_stackview/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "rails_stackview"
+  s.name        = "stackview_acorn_tester"
   s.version     = RailsStackview::VERSION
-  s.authors     = ["Jonathan Rochkind"]
-  s.email       = ["jonathan@dnil.net"]
-  s.homepage    = "https://github.com/jrochkind/rails_stackview"
-  s.summary     = "Tools for integrating the stackview browsing JS UI with Rails"
+  s.authors     = ["Amanda Cornwell"]
+  s.email       = ["amanda.cornwell@jhu.edu"]
+  s.homepage    = "https://github.com/acornwe3/rails_stackview"
+  s.summary     = "Test"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib,vendor}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.2"
+  s.add_dependency "rails", "~> 5.1"
   s.add_dependency "jquery-rails" # stackview needs jquery
   s.add_dependency "sass-rails" # we do use scss, leaving version string off to let rails app do it hopefully
 end

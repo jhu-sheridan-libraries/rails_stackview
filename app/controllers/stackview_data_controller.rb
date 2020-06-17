@@ -1,11 +1,15 @@
 class StackviewDataController < ApplicationController
+
+  ApplicationController::ActionController::Parameters.permit_all_parameters = true
+  ApplicationController::ActionController::Parameters.action_on_unpermitted_parameters = :raise
+
   # stackview doesn't like it if certain things are blank
   DefaultStackviewDocAttributes = {
     "measurement_height_numeric" => 23,
     "shelfrank" => 1,
     "measurement_page_numeric" => 100
   }
-
+ß
   # config for different call number types; we don't
   # fully support call number types yet, but are building for it. 
   # with the exception of the 'test' type
