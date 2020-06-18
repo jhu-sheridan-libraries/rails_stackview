@@ -88,7 +88,7 @@
     }
   }
 
-  $( document ).on("ready", function() {
+  $( window ).load(function() {
     if ($(".shelfbrowser").length > 0) {
       fitToWindowHeight();
 
