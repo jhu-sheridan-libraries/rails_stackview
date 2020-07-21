@@ -1,7 +1,7 @@
 class StackviewDataController < ApplicationController
 
-  ApplicationController::ActionController::Parameters.permit_all_parameters = true
-  ApplicationController::ActionController::Parameters.action_on_unpermitted_parameters = :raise
+  ActionController::Parameters.permit_all_parameters = true
+  ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
   # stackview doesn't like it if certain things are blank
   DefaultStackviewDocAttributes = {
@@ -11,7 +11,7 @@ class StackviewDataController < ApplicationController
   }
 
   # config for different call number types; we don't
-  # fully support call number types yet, but are building for it. 
+  # fully support call number types yet, but are building for it.
   # with the exception of the 'test' type
   class_attribute :_config_for_types
   self._config_for_types = {
@@ -30,7 +30,7 @@ class StackviewDataController < ApplicationController
       :fetch_adapter => lambda { RailsStackview::MockFetcher.new }
     },
     'lc' => {
-      # defaults are good. 
+      # defaults are good.
     }
   }
   def self.set_config_for_type(type, attributes)
@@ -65,10 +65,10 @@ class StackviewDataController < ApplicationController
   def fetch
     config = config_for_type( params[:call_number_type] )
 
-    fetch_adapter = config[:fetch_adapter].call    
+    fetch_adapter = config[:fetch_adapter].call
 
     # Make sure defaults are covered
-    docs = fetch_adapter.fetch(params).collect do |d|      
+    docs = fetch_adapter.fetch(params).collect do |d|
       d = d.reverse_merge DefaultStackviewDocAttributes
       # stackview doens't like shelfrank's over 100
       d["shelfrank"] = [d["shelfrank"], 100].min
