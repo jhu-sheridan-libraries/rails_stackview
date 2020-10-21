@@ -9,7 +9,7 @@
 
       shelfbrowser.css("height",  height);
       // set a bunch of elements to have same height, CSS tricks
-      // to make it expand to fit weren't working esp in IE. 
+      // to make it expand to fit weren't working esp in IE.
       $(".shelfbrowser-stackview").css("height", height);
       $(".shelfbrowser-browser-column").css("height", height);
       $(".shelfbrowser-info-column").css("height", height);
@@ -52,7 +52,7 @@
         $(".shelfbrowser-info-column").fadeTo(1, .99).fadeTo(1, 1);
 
         // If the info column was previously scrolled, we want
-        // to go to top for this new content. 
+        // to go to top for this new content.
         $(".shelfbrowser-info-column").scrollTop(0);
       }
     });
@@ -66,16 +66,16 @@
   }
 
   // We add origin_sort_key=$sort_key into the current
-  // URL using pushState, if in a browser that supports. 
+  // URL using pushState, if in a browser that supports.
   //
   // The intention is to 'remember' the currently selected
-  // item on browser back button to this page, etc. 
+  // item on browser back button to this page, etc.
   //
   // It does assume the host app is supporting ?origin_sort_key=$sort_key
   // and passing it to template, to work. Could make more configurable
-  // later. 
+  // later.
   function replaceSelectedState(item) {
-    if ('history' in window && 'replaceState' in history && 'sort_key' in item) { 
+    if ('history' in window && 'replaceState' in history && 'sort_key' in item) {
       var query = location.search;
       if (query.length == 0)
         query = '?';
@@ -83,21 +83,21 @@
       // replace origin_sort_key only if it exists
       var re = new RegExp("([\\?&])origin_sort_key=([^&#]*)");
       query = query.replace(re, '$1origin_sort_key=' + encodeURIComponent(item.sort_key));
-      
+
       history.replaceState({}, '', query + location.hash);
     }
   }
 
-  $( window ).load(function() {
+  $(window).on('load', function() {
     if ($(".shelfbrowser").length > 0) {
       fitToWindowHeight();
 
       $( window ).on("resize orientationchange", function() {
         fitToWindowHeight();
       });
-      
+
       // If stackview_browser_item_path is defined, click on item
-      // should load partial via AJAX, and preventDefault. 
+      // should load partial via AJAX, and preventDefault.
       $(document).on("click", ".shelfbrowser .stack-item a", function(event) {
         var target        = $(event.target);
         var item_load_url = target.closest(".shelfbrowser-browse-column").data('stackviewBrowserItemPath');
@@ -119,11 +119,11 @@
 
       // Catch stackview.page the FIRST time, so we can find the origin
       // document and add a special class to it, which we'll use to click
-      // on it immediately, and set the scroll view so it's centered. 
+      // on it immediately, and set the scroll view so it's centered.
       $(document).on("stackview.pageload.initial-select", function(event) {
-        // Find the .stack-item which has data origin:true set, and click it. 
+        // Find the .stack-item which has data origin:true set, and click it.
         // Since we're only executing on first load, this shouldn't be
-        // that many items. 
+        // that many items.
 
         var item_load_url = $(event.target).closest(".shelfbrowser-browse-column").data('stackviewBrowserItemPath');
 
@@ -134,25 +134,25 @@
           if($(item).data("stackviewItem").is_origin_item) {
             $origin_item = $(item);
             // We add stackview-origin class to allow us to
-            // find it and position the scroll properly on load. 
+            // find it and position the scroll properly on load.
             $origin_item.addClass("stackview-origin");
           }
         });
 
         //... we want to simulate clicking the origin, if we have a load url,
-        // so we can load it. 
+        // so we can load it.
         if (item_load_url) {
           $origin_item.find("a").trigger('click');
         }
 
         //... we want to try to set the scroll such that our origin item is
-        // centered. 
+        // centered.
         // stackview out of the box doesn't quite get this right, it's tricky,
-        // we seem to be doing okay. 
+        // we seem to be doing okay.
         var container = $origin_item.closest("ul.stack-items");
         container.scrollTop( $origin_item.get(0).offsetTop - (container.height() / 2) + ($origin_item.height() / 2) )
-        
-        // Remove our handler, we only want to do this once. 
+
+        // Remove our handler, we only want to do this once.
         $(document).off("stackview.pageload.initial-select");
       });
     }
