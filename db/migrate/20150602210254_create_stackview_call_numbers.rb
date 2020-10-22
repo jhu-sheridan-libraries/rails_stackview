@@ -1,4 +1,4 @@
-class CreateStackviewCallNumbers < ActiveRecord::Migration
+class CreateStackviewCallNumbers < ActiveRecord::Migration[4.2]
   def change
     create_table :stackview_call_numbers do |t|
       # these are what we want to assemble items in a sequence,
@@ -9,7 +9,7 @@ class CreateStackviewCallNumbers < ActiveRecord::Migration
       # and be able to link back to external systems
       t.string :system_id, :null => false, :length => 100
 
- 
+
       # These are what stackview wants or can use
 
       t.string :title, :null => false
