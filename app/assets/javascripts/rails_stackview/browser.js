@@ -3,7 +3,7 @@
   function fitToWindowHeight() {
     var shelfbrowser = $(".shelfbrowser");
 
-    if (shelfbrowser.size() > 0) {
+    if (shelfbrowser.length > 0) {
       var topOffset = shelfbrowser.offset().top;
       var height    = $(window).innerHeight() - topOffset;
 
