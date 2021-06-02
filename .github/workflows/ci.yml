@@ -1,0 +1,32 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.7', '3.0' ]
+    name: Ruby ${{ matrix.ruby }} sample
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Setup ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+
+      - name: Install bundler deps
+        run: |
+          bundle install
+
+      - name: db migrate
+        run: |
+           RAILS_ENV=test bundle exec rake --trace db:migrate
+
+      - name: Run the tests
+        run: |
+          RAILS_ENV=test bundle exec rake test
